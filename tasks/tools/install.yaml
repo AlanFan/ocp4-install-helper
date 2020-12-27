@@ -1,0 +1,17 @@
+---
+- name: install tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - haproxy
+  - dnsmasq
+  - httpd
+- name: config dnsmasq
+  template:
+    src: templates/ocp.conf.j2
+    dest: /etc/dnsmasq.d/ocp.conf
+- name: config haproxy
+  template:
+    src: templates/haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg

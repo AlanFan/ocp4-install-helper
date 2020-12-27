@@ -1,0 +1,35 @@
+apiVersion: v1
+baseDomain: {{ ocp.base_domain}}
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ocp4
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  none: {}
+fips: false
+pullSecret: '{"auths":{"{{ ocp.registry.name }}.{{ ocp.base_domain }}:5000":{"auth":"YWRtaW46cmVkaGF0","email":"pfan@redhat.com"}}}'
+sshKey: '{{ bastion_pub.stdout }}'
+additionalTrustBundle: |
+{% for line in registry_crt.stdout_lines %}
+  {{ line }}
+{% endfor %}
+imageContentSources:
+- mirrors:
+  - {{ ocp.registry.name }}.{{ ocp.base_domain }}:5000/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - {{ ocp.registry.name }}.{{ ocp.base_domain }}:5000/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

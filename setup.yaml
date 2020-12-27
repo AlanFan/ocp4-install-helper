@@ -1,0 +1,19 @@
+- hosts: helper
+  name: config registry
+  tasks:
+  - import_tasks: tasks/registry/mkdir.yaml
+  - import_tasks: tasks/registry/config.yaml
+  - import_tasks: tasks/registry/container.yaml
+
+
+- hosts: helper
+  name: generate install-config.yaml
+  tasks:
+  - import_tasks: tasks/install-config/install-config.yaml
+
+
+- hosts: helper
+  name: install bastic tools
+  tasks:
+  - import_tasks: tasks/tools/install.yaml
+  - import_tasks: tasks/tools/enable.yaml

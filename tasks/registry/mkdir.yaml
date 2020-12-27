@@ -1,0 +1,5 @@
+---
+- name: crate registry directory
+  shell: 
+    cmd: mkdir -p /opt/registry/{auth,certs,data}
+    warn: False

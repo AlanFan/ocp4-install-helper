@@ -1,0 +1,25 @@
+ocp:
+ dns: 10.72.17.5
+ base_domain: pfan.lab.local
+ registry:
+  username: admin
+  password: redhat
+  name: registry
+  ip: 10.73.93.111
+ bootstrap:
+  name: bootstrap
+  ip: 10.73.93.130
+ masters:
+ - name: master-0
+   ip: 10.73.93.131
+ - name: master-1
+   ip: 10.73.93.132
+ - name: master-2
+   ip: 10.73.93.133
+ workers:
+ - name: worker-0
+   ip: 10.73.93.134
+ - name: worker-1
+   ip: 10.73.93.135
+ - name: worker-2
+   ip: 10.73.93.136

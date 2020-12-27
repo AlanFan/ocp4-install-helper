@@ -1,0 +1,24 @@
+server={{ ocp.dns }}
+
+# bootstrap
+host-record={{ ocp.bootstrap.name }}.{{ ocp.base_domain }},{{ ocp.bootstrap.ip }}
+
+# masters
+{% for item in ocp.masters %}
+host-record={{ item.name }}.{{ ocp.base_domain }},{{ item.ip }}
+{% endfor %}
+
+# workers
+{% for item in ocp.workers %}
+host-record={{ item.name }}.{{ ocp.base_domain }},{{ item.ip }}
+{% endfor %}
+
+# registry
+host-record={{ ocp.registry.name }}.{{ ocp.base_domain }},{{ ocp.registry.ip }}
+
+# routes
+address=/apps.{{ ocp.base_domain }}/{{ inventory_hostname }}
+
+# api
+address=/api.{{ ocp.base_domain }}/{{ inventory_hostname }}
+address=/api-int.{{ ocp.base_domain }}/{{ inventory_hostname }}

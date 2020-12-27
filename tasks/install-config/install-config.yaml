@@ -1,0 +1,16 @@
+---
+- name: create install directory
+  file:
+    path: /root/ocp4/install
+    state: directory
+    mode: '0755'
+- name: get public key
+  shell: cat /root/.ssh/id_rsa.pub
+  register: bastion_pub
+- name: get registry certificate
+  shell: cat /opt/registry/certs/domain.crt
+  register: registry_crt
+- name: generate install-config.yaml
+  template:
+    src: templates/install-config.yaml.j2
+    dest: /root/ocp4/install/install-config.yaml
