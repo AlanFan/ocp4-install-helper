@@ -20,7 +20,7 @@ networking:
 platform:
   none: {}
 fips: false
-pullSecret: '{"auths":{"{{ ocp.registry.name }}.{{ ocp.base_domain }}:5000":{"auth":"YWRtaW46cmVkaGF0","email":"pfan@redhat.com"}}}'
+pullSecret: '{"auths":{"{{ ocp.registry.name }}.{{ ocp.base_domain }}:5000":{"auth":"{{ base64_encoded.stdout }}","email":"pfan@redhat.com"}}}'
 sshKey: '{{ bastion_pub.stdout }}'
 additionalTrustBundle: |
 {% for line in registry_crt.stdout_lines %}

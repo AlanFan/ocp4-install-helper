@@ -10,6 +10,9 @@
 - name: get registry certificate
   shell: cat /opt/registry/certs/domain.crt
   register: registry_crt
+- name: base64 username and password
+  shell: echo -n '{{ ocp.registry.username }}:{{ ocp.registry.password }}' | base64 -w0
+  register: base64_encoded
 - name: generate install-config.yaml
   template:
     src: templates/install-config.yaml.j2
